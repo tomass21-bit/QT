@@ -21,8 +21,10 @@ void MainWindow::on_PB_bar_toggled(bool checked)
        ui->progressBar->setValue(0);
     }
     else{
+     unsigned m=ui->progressBar->maximum();
+     m*=0.1;
      unsigned v=ui->progressBar->value();
-     ++v;
+     v+=m;
     ui->progressBar->setValue(v);
     }
 }
