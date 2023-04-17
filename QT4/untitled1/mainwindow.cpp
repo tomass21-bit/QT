@@ -5,8 +5,17 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);
 
+    ui->setupUi(this);
+    ui->RB_left->setText("Left_B");
+    ui->RB_right->setText("Right_B");
+    ui->comboBox->addItem("июнь");
+    ui->comboBox->addItem("июль");
+    ui->PB_bar->setText("Progres");
+    ui->PB_bar->setCheckable(true);
+    ui->progressBar->setMinimum(0);
+    ui->progressBar->setMaximum(10);
+    ui->progressBar->setValue(0);
 }
 
 MainWindow::~MainWindow()

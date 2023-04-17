@@ -47,20 +47,20 @@
     <item>
      <widget class="QProgressBar" name="progressBar">
       <property name="maximum">
-       <number>10</number>
+       <number>100</number>
       </property>
       <property name="value">
-       <number>0</number>
+       <number>23</number>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QPushButton" name="PB_bar">
       <property name="text">
-       <string>Progres</string>
+       <string>rogres</string>
       </property>
       <property name="checkable">
-       <bool>true</bool>
+       <bool>false</bool>
       </property>
      </widget>
     </item>
