@@ -10,13 +10,15 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Core)
 
 set(PROJECT_SOURCES
         main.cpp
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
+        stopwatch.cpp
+        stopwatch.h
 )
 
 
@@ -30,14 +32,15 @@ set(PROJECT_SOURCES
 # For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
 
 
-target_link_libraries(untitled1 PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(untitled1 PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
+                                PRIVATE Qt${QT_VERSION_MAJOR}::Core)
 
 set_target_properties(untitled1 PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
     MACOSX_BUNDLE TRUE
-
+    WIN32_EXECUTABLE TRUE
 )
 
 install(TARGETS untitled1
