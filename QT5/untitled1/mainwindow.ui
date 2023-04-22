@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>50</x>
@@ -30,7 +30,7 @@
         <enum>Qt::RightToLeft</enum>
        </property>
        <property name="text">
-        <string>0</string>
+        <string>00:00:00</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
