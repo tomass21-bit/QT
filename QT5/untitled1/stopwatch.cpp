@@ -4,11 +4,13 @@ Stopwatch::Stopwatch(QObject *parent) : QObject{parent}
 {
     timer = new QTimer(this);
     time = new QTime(0,0,0,0);
-   t=time->addMSecs(0);
+    time_now=time->addMSecs(0);
+    old_time=time->addMSecs(0);
+    numloop = 0;
+    temp=0;
+    showloopstr="";
+    connect(timer,&QTimer::timeout,this, &Stopwatch::UpdateTime);
 
-    NumLoop = 0;
-       temp=0;
-       ShowLoop="";
 }
 
 Stopwatch::~Stopwatch()
@@ -16,34 +18,19 @@ Stopwatch::~Stopwatch()
 
 }
 
-void Stopwatch::SendStartSignal()
-{
-    emit sig_SendStart();
-
-}
 void Stopwatch::SendStopSignal()
 {
     emit sig_SendStop();
-
 }
 
-QString Stopwatch::showtime()
+
+
+QString Stopwatch::ShowLoop()
 {
-    return t.toString("mm:ss:z");
+   return showloopstr;
 }
 
-QString Stopwatch::showloop()
-{
-   return ShowLoop;
-}
 
-void Stopwatch::Start()
-{
-    connect(timer,SIGNAL(timeout()),this,SLOT(updateTime()));
-    connect(timer,SIGNAL(timeout()),this,SIGNAL(emit sig_SendStart()));
-    timer->start(100);
-
-}
 
 void Stopwatch::Stop()
 {
@@ -52,35 +39,27 @@ void Stopwatch::Stop()
 
 void Stopwatch::Clear()
 {
-    t=time->addMSecs(0);
-    NumLoop=0;
-    loop.clear();
-
+    time_now=time->addMSecs(0);
+    old_time=time->addMSecs(0);
+    numloop=0;
 
 }
 
 void Stopwatch::Loop()
 {
-    if(loop.empty()==true){
-        loops=t;
-        loop.push_back(loops);
-        NumLoop++;
-    }
-    else
-    {
-     int temp= t.msecsTo(loop.back());
+    int temp= old_time.msecsTo(time_now);
+    loops=time->addMSecs(temp);
+    old_time=time_now;
+    numloop++;
 
-    loops=time->addMSecs(-temp);
-    loop.push_back(loops);
-    NumLoop++;}
-    QString::number(NumLoop);
-    ShowLoop ="Круг № "+ QString::number(NumLoop)+ " Время: " + loops.toString("mm:ss:z");
+    QString::number(numloop);
+    showloopstr ="Круг № "+ QString::number(numloop)+ " Время: " + loops.toString("mm:ss:z");
 
 }
 
-void Stopwatch::updateTime()
-{
-   t= t.addMSecs(100);
-
+void Stopwatch::UpdateTime()
+{  timer->start(100);
+   time_now= time_now.addMSecs(100);
+   emit sig_SendStart(time_now.toString("mm:ss:z"));
 
 }

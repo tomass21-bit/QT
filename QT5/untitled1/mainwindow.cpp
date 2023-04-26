@@ -9,9 +9,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->PB_start->setText("Старт");
     ui->PB_loop->setEnabled(false);
     sigCall = new Stopwatch(this);
-    QObject::connect(sigCall, &Stopwatch::sig_SendStart, this, &MainWindow::RcvSignalStart, Qt::ConnectionType());
-    QObject::connect(sigCall, &Stopwatch::sig_SendStop, this, &MainWindow::RcvSignalStop, Qt::ConnectionType());
 
+    connect(sigCall, &Stopwatch::sig_SendStop, this, &MainWindow::RcvSignalStop);
+    connect(sigCall, &Stopwatch::sig_SendStart, this, &MainWindow::RcvSignalStart);
 }
 
 MainWindow::~MainWindow()
@@ -20,10 +20,10 @@ MainWindow::~MainWindow()
 
 }
 
-void MainWindow::RcvSignalStart()
+void MainWindow::RcvSignalStart(QString time)
 {
 
-   ui->lb_time->setText(sigCall->showtime());
+   ui->lb_time->setText(time);
 }
 void MainWindow::RcvSignalStop()
 {
@@ -36,9 +36,8 @@ void MainWindow::on_PB_start_toggled(bool checked)
 {
 
     if(ui->PB_start->isChecked()==true)  
-    {
-
-     sigCall->Start();
+    {    
+     sigCall->UpdateTime();
      ui->PB_start->setText("Стоп");
      ui->PB_loop->setEnabled(true);
     }
@@ -54,7 +53,7 @@ void MainWindow::on_PB_start_toggled(bool checked)
 void MainWindow::on_PB_clear_clicked()
 {
     sigCall->Clear();
-    ui->lb_time->setText(sigCall->showtime());
+    ui->lb_time->setText("00:00:0");
     ui->textBrowser->clearHistory();
 
 
@@ -64,6 +63,6 @@ void MainWindow::on_PB_clear_clicked()
 void MainWindow::on_PB_loop_clicked()
 {
    sigCall->Loop();
-   ui->textBrowser->append(sigCall->showloop());
+   ui->textBrowser->append(sigCall->ShowLoop());
 }
 

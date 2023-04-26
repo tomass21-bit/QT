@@ -32,8 +32,7 @@ set(PROJECT_SOURCES
 # For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
 
 
-target_link_libraries(untitled1 PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
-                                PRIVATE Qt${QT_VERSION_MAJOR}::Core)
+target_link_libraries(untitled1 PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 
 set_target_properties(untitled1 PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com

@@ -15,14 +15,11 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 private slots:
-    void RcvSignalStart(void);
     void RcvSignalStop(void);
+    void RcvSignalStart(QString);
 private slots:
     void on_PB_start_toggled(bool checked);
-
-
     void on_PB_clear_clicked();
-
     void on_PB_loop_clicked();
 
 private:
