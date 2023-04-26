@@ -26,7 +26,5 @@ private:
     Ui::MainWindow *ui;
     Stopwatch *sigCall;
 
-
-
 };
 #endif // MAINWINDOW_H

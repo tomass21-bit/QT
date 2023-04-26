@@ -14,9 +14,7 @@ public:
    ~Stopwatch(void);
 
    void SendStopSignal(void);
-
    QString ShowLoop();
-
    void Stop();
    void Clear();
    void Loop();
@@ -31,7 +29,6 @@ private:
    unsigned numloop;
    int temp;
 
-
 public slots:
    void UpdateTime();
 
@@ -39,7 +36,5 @@ signals:
    void sig_SendStart(QString);
    void sig_SendStop(void);
 };
-
-
 
 #endif // STOPWATCH_H

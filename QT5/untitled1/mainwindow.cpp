@@ -17,24 +17,21 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
-
 }
 
 void MainWindow::RcvSignalStart(QString time)
 {
-
    ui->lb_time->setText(time);
 }
+
 void MainWindow::RcvSignalStop()
 {
    sigCall->Stop();
    ui->PB_start->setText("Старт");
 }
 
-
 void MainWindow::on_PB_start_toggled(bool checked)
 {
-
     if(ui->PB_start->isChecked()==true)  
     {    
      sigCall->UpdateTime();
@@ -43,10 +40,9 @@ void MainWindow::on_PB_start_toggled(bool checked)
     }
     else
     {
-      sigCall->SendStopSignal();
-      ui->PB_loop->setEnabled(false);
+     sigCall->SendStopSignal();
+     ui->PB_loop->setEnabled(false);
     }
-
 }
 
 
@@ -55,8 +51,6 @@ void MainWindow::on_PB_clear_clicked()
     sigCall->Clear();
     ui->lb_time->setText("00:00:0");
     ui->textBrowser->clearHistory();
-
-
 }
 
 
