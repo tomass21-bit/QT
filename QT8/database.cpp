@@ -45,7 +45,7 @@ void DataBase::ConnectToDataBase(QVector<QString> data)
 
     bool status;
     status = dataBase->open( );
-
+    allQuery = new QSqlTableModel(this, *dataBase);
     emit sig_SendStatusConnection(status);
 
 }
@@ -70,7 +70,7 @@ void DataBase::RequestToDB(QString request, int requestType)
 
     if(dataBase->open()){
         if(requestType==1){
-            allQuery = new QSqlTableModel(this, *dataBase);
+
             allQuery->setEditStrategy(QSqlTableModel::OnFieldChange);
             allQuery->setTable("film");
             allQuery->removeColumn(0);
